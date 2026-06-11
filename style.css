@@ -1,38 +1,101 @@
-body {
-    background-color: #1a1a1a;
-    color: #ffffff;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none; /* Disables double-tap magnifying/text highlight on buttons */
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed; 
+    background-color: #0b140b;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    padding: 20px 10px;
+    touch-action: none; 
 }
 
-.game-container {
+.hud {
+    width: 100%;
     text-align: center;
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    letter-spacing: 5px;
-    color: #4CAF50;
+    margin-top: 10px;
 }
 
 .score-board {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+}
+
+.canvas-container {
+    width: 82vmin; /* Shrunk slightly to guarantee D-pad breathing room */
+    height: 82vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 canvas {
-    background-color: #111;
-    border: 4px solid #4CAF50;
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    width: 100%;
+    height: 100%;
+    background-color: #050805;
+    border: 5px solid #2E7D32;
+    box-shadow: 0 0 20px rgba(46, 125, 50, 0.3);
+    
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
-.controls-hint {
-    margin-top: 15px;
-    color: #888;
-    font-size: 0.9rem;
+/* --- Virtual D-Pad Layout --- */
+.dpad-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.dpad-row {
+    display: flex;
+    justify-content: center;
+}
+
+.dpad-btn {
+    width: 65px;
+    height: 65px;
+    margin: 4px;
+    background-color: #1e331e;
+    border: 3px solid #2E7D32;
+    border-radius: 12px;
+    color: #4CAF50;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 0 #122112;
+    cursor: pointer;
+}
+
+/* Active pressed states for touch response feedback */
+.dpad-btn:active {
+    background-color: #2E7D32;
+    color: #ffffff;
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #122112;
+}
+
+.dpad-spacer {
+    width: 65px;
+    height: 65px;
+    margin: 4px;
 }
